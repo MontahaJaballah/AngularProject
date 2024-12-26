@@ -1,0 +1,24 @@
+<div class="container">
+    <div>
+        <input type="text" placeholder="rechercher un produit..." [(ngModel)]="search">
+    </div>
+    <div class="row">
+    <div class="col-md-4" style="margin-bottom: 20px;" *ngFor="let categorie of categories | tab:search">
+    <img [src]="categorie.image" [alt]="categorie.title"
+    class="img-fluid h-50 w-75" (click)="affichedesc(categorie.description)">
+     <!--Pipe : -->   
+    <h3>{{categorie.title | uppercase }}</h3>
+   <!-- <p>{{categorie.description}}</p>-->
+   <a [routerLink]="['DetailsCategory', categorie.id]">Voir détails</a>  
+      <!--PathParam : -->
+    <button class="btn btn-primary" *ngIf="categorie.available"  [routerLink]="['/categories', categorie.id]">Voir produits</button>
+    <!--Query Param : -->
+    <button class="btn btn-primary" *ngIf="categorie.available"  [routerLink]="['/ProductsCatQP']"[queryParams]="{id: categorie.id}">Voir produits 2</button>
+    <p class="text-danger" *ngIf="!categorie.available">Catégorie non disponible</p>
+    <router-outlet></router-outlet>
+    </div>
+   
+        </div>
+        
+        </div>
+        

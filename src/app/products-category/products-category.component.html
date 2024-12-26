@@ -1,0 +1,18 @@
+<div class="products-container">
+    <h1>Produits de la catégorie {{ categoryId }}</h1>
+    
+    <div *ngIf="filteredProducts.length > 0; else noProducts">
+      <div *ngFor="let product of filteredProducts" class="product-card">
+        <img [src]="product.image" [alt]="product.name" class="product-image" />
+        <h2>{{ product.name }}</h2>
+        <p><strong>Marque:</strong> {{ product.brand }}</p>
+        <p><strong>Prix:</strong> {{ product.price }} TND</p>
+        <p *ngIf="product.promotion > 0"><strong>Promotion:</strong> {{ product.promotion }}%</p>
+      </div>
+    </div>
+    <a [routerLink]="['/formProduct']">add product</a>
+    <ng-template #noProducts>
+      <p>Aucun produit trouvé pour cette catégorie.</p>
+    </ng-template>
+    <router-outlet></router-outlet>
+  </div>
